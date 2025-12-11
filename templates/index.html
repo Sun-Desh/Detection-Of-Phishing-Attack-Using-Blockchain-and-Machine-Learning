@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Phishing Detection</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .input-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        input[type="url"] {
+            flex-grow: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        .button-group {
+            display: flex;
+            gap: 10px;
+        }
+        .check-button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .report-button {
+            background-color: #f44336;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .check-button:hover {
+            background-color: #45a049;
+        }
+        .report-button:hover {
+            background-color: #da190b;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 4px;
+        }
+        .legitimate {
+            background-color: #dff0d8;
+            border: 1px solid #d6e9c6;
+            color: #3c763d;
+        }
+        .phishing {
+            background-color: #f2dede;
+            border: 1px solid #ebccd1;
+            color: #a94442;
+        }
+        .reported {
+            background-color: #fcf8e3;
+            border: 1px solid #faebcc;
+            color: #8a6d3b;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Phishing Detection Using Blockchain and Machine Learning</h1>
+        
+        <!-- Single Input Form with Two Buttons -->
+        <div class="form-group">
+            <form id="urlForm" onsubmit="return false;">
+                <div class="input-group">
+                    <input type="url" id="url-input" name="url" placeholder="Enter URL to check or report" required>
+                </div>
+                <div class="button-group">
+                    <button type="button" class="check-button" onclick="submitForm('check')">Check URL</button>
+                    <button type="button" class="report-button" onclick="submitForm('report')">Report URL</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Display Results -->
+        {% if result %}
+        <div class="result {% if result.prediction == 'legitimate' %}legitimate{% elif result.prediction == 'Reported Phishing' %}reported{% else %}phishing{% endif %}">
+            <h3>Results for: {{ result.url }}</h3>
+            {% if result.processed_url != result.url %}
+            <p>Processed URL: {{ result.processed_url }}</p>
+            {% endif %}
+            
+            {% if result.reported_by_user %}
+            <div class="reported-warning">
+                <p><strong>⚠️ This URL was reported as phishing by users</strong></p>
+                <p>Report Time: {{ result.report_time }}</p>
+            </div>
+            {% endif %}
+            
+            <p>Status: {{ result.prediction }}</p>
+            <p>Confidence: {{ result.confidence }}</p>
+            {% if result.confidence_level %}
+            <p>Confidence Level: {{ result.confidence_level }}</p>
+            {% endif %}
+            
+            {% if result.from_blockchain %}
+            <p class="blockchain-info">⚡ Retrieved from blockchain (Last checked: {{ result.last_checked }})</p>
+            {% endif %}
+            
+            {% if result.suspicious_patterns %}
+            <p>Suspicious Patterns Found: {{ result.suspicious_patterns }}</p>
+            {% endif %}
+        </div>
+        {% endif %}
+
+        {% if error %}
+        <div class="result phishing">
+            <p>Error: {{ error }}</p>
+        </div>
+        {% endif %}
+    </div>
+
+    <script>
+        function submitForm(action) {
+            const form = document.getElementById('urlForm');
+            const url = document.getElementById('url-input').value;
+            
+            if (!url) {
+                alert('Please enter a URL');
+                return;
+            }
+
+            // Create a new form and submit it
+            const submitForm = document.createElement('form');
+            submitForm.method = 'POST';
+            submitForm.action = action === 'check' ? '/check_url' : '/report_url';
+            
+            const urlInput = document.createElement('input');
+            urlInput.type = 'hidden';
+            urlInput.name = 'url';
+            urlInput.value = url;
+            
+            submitForm.appendChild(urlInput);
+            document.body.appendChild(submitForm);
+            submitForm.submit();
+        }
+    </script>
+</body>
+</html>

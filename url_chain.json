@@ -1,0 +1,45 @@
+[
+    {
+        "index": 0,
+        "timestamp": 1762098141.3050177,
+        "urls": [],
+        "hash": "e74b80a0c6360a0320c968aa02dbddfc15524f43134ff2030e34baaa0f002d11",
+        "previous_hash": "0"
+    },
+    {
+        "index": 1,
+        "timestamp": 1762098154.433489,
+        "urls": [
+            {
+                "url": "https://example.com",
+                "status": "pending",
+                "confidence": 0.0,
+                "timestamp": 1762098151.2018697,
+                "last_checked": 1762098151.2018697,
+                "is_reported": false,
+                "phishing_reports": 0
+            },
+            {
+                "url": "https://example.com",
+                "status": "legitimate",
+                "confidence": 0.9251,
+                "timestamp": 1762098151.2480845,
+                "last_checked": 1762098151.2480845,
+                "is_reported": false,
+                "phishing_reports": 0
+            },
+            {
+                "url": "https://example.com",
+                "status": "reported_phishing",
+                "confidence": 0.9,
+                "timestamp": 1762098154.4334548,
+                "last_checked": 1762098154.4334548,
+                "is_reported": true,
+                "phishing_reports": 1,
+                "report_time": "2025-11-02 21:42:34"
+            }
+        ],
+        "hash": "51762b01412f3d840d78e8f71893f5cbe611b8340289fed720b6ffdc83b49174",
+        "previous_hash": "e74b80a0c6360a0320c968aa02dbddfc15524f43134ff2030e34baaa0f002d11"
+    }
+]
