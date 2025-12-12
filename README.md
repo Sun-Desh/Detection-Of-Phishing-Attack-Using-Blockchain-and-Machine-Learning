@@ -620,11 +620,3 @@ This project demonstrates the effective combination of modern machine learning t
 The implementation shows promising results in both accuracy and performance, while the blockchain integration ensures result persistence and enables community-driven reporting for improved detection rates.
 
 ---
-
-## Contact & Contributors
-
-[Your Name/Team Information]
-
-## License
-
-[Specify License]
