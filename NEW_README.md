@@ -214,6 +214,3 @@ This project demonstrates the effective combination of machine learning and bloc
 ```
 
 ---
-
-## Contact
-For further inquiries, contact [Your Name/Team].
